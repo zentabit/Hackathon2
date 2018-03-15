@@ -1,10 +1,10 @@
 import random
 
 class DataBase:
-	def __init__(self):
+    def __init__(self):
         self.name = "2A"
         self.students = []
-        
+
     def add(self, student):
         self.students.append(student)
     
@@ -25,11 +25,11 @@ class DataBase:
     def get_data(self):
         all_data = []
         for student in self.students:
-            all_data.append(student.getdata())
+            all_data.append(student.get_data())
         return all_data
     
     def export_data(self, file_name, format=".txt"):
-        with open(file_name, "w") as file:
+        with open(file_name + format, "w") as file:
             for student in self.get_data():
                 file.write(f"{student[0]}-{student[1]}\n")
 
@@ -45,12 +45,15 @@ class Student:
         return (self.name, self.history)
 
 names = ["Arvid", "Vincent", "Ida", "SaltyBoye Alex"]
-last_names = ["Ilber", "Uden", "Franzén", "Inte ordförande i elekåren"]
+last_names = ["Ilber", "Uden", "Franzén", "Inte ordförande i elevkåren"]
 times = ["11:59", "04:20", "13:37", "12:34"]
 programs = ["Drive", "Runescape", "Classroom", "Youtube"]
 
-base = Database()
+base = DataBase()
 for x in range(30):
     tmp = Student(random.choice(names) + " " + random.choice(last_names))
     tmp.add_history(random.choice(times), random.choice(programs))
     base.add(tmp)
+
+base.students[0].add_history("13:10", "Bananpaj")
+base.export_data("1")
